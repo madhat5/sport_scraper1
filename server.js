@@ -16,18 +16,26 @@ console.log('Silence please...' + '\n' + 'Curtains up...' + '\n' + 'Server start
 
 app.get('/scrape', function(req, res){
 
-  url = 'http://www.imdb.com/title/tt1229340/';
+  url = 'http://espn.go.com/nhl/statistics/player/_/stat/points/'
 
   request(url, function(err, resp, html){
     if (!err){
       var $ = cheerio.load(html);
 
-      var title, release, rating;
+      var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes
+
       var json = {
-        title : "",
-        release : "",
-        rating : ""
-      };
+        playerInfo : {
+          playerName : "",
+          position : "",
+          team : "",
+          gamesPlayed : "",
+          goals : "",
+          assists : "",
+          plusMinus : "",
+          penMinutes : "",
+        },
+      }
 
       $('.header').filter(function(){
         var data = $(this);
