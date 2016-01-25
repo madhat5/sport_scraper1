@@ -16,7 +16,7 @@ console.log('Silence please...' + '\n' + 'Curtains up...' + '\n' + 'Server start
 
 app.get('/scrape', function(req, res){
 
-  // url = 'http://www.imdb.com/title/tt1229340/';
+  url = 'http://www.imdb.com/title/tt1229340/';
 
   request(url, function(err, resp, html){
     if (!err){
