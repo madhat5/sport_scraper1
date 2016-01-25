@@ -16,9 +16,9 @@ console.log('Silence please...' + '\n' + 'Curtains up...' + '\n' + 'Server start
 
 app.get('/scrape', function(req, res){
 
-  url = 'http://www.imdb.com/title/tt1229340/';
+  // url = 'http://www.imdb.com/title/tt1229340/';
 
-  request(url, function(err, res, html){
+  request(url, function(err, resp, html){
     if (!err){
       var $ = cheerio.load(html);
 
@@ -47,11 +47,11 @@ app.get('/scrape', function(req, res){
       })
     }; // end of if
 
-    fs.write('output.json', JSON.stringify(json, null, 4), function(err){
+    fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
       console.log('File created! JSON file located in project dir')
     });
 
-    res.send('Check console for status');
+    // res.send('Check console for status');
   }) // end of request
 });
 
