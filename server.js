@@ -22,37 +22,44 @@ app.get('/scrape', function(req, res){
     if (!err){
       var $ = cheerio.load(html);
 
-      var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes
+      var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
 
       var json = {
         playerInfo : {
           playerName : "",
-          position : "",
-          team : "",
-          gamesPlayed : "",
-          goals : "",
-          assists : "",
-          plusMinus : "",
-          penMinutes : "",
+          // position : "",
+          // team : "",
+          // gamesPlayed : "",
+          // goals : "",
+          // assists : "",
+          // plusMinus : "",
+          // penMinutes : "",
         },
-      }
+      };
 
-      $('.header').filter(function(){
+      $('.oddrow' && '.evenrow').filter(function(){
         var data = $(this);
 
-        title = data.children().first().text();
-        release = data.children().last().children().text();
+        playerName = data.children().eq(1).children().text();
+        // position = ;
+        // team = ;
+        // gamesPlayed = ;
+        // goals = ;
+        // assists = ;
+        // plusMinus = ;
+        // penMinutes = ;
 
-        json.title = title;
-        json.release = release;
+        json.playerInfo.playerName = playerName;
+        // json.playerInfo.position = position;
+        // json.playerInfo.team = team;
+        // json.playerInfo.gamesPlayed = gamesPlayed;
+        // json.playerInfo.goals = goals;
+        // json.playerInfo.assists = assists;
+        // json.playerInfo.plusMinus = plusMinus;
+        // json.playerInfo.penMinutes = penMinutes;
       });
 
-      $('.star-box-giga-star').filter(function(){
-        var data = $(this);
 
-        rating = data.text();
-        json.rating = rating;
-      })
     }; // end of if
 
     fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
