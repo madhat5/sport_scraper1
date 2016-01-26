@@ -12,8 +12,8 @@ app.listen(port);
 console.log('Silence please...' + '\n' + 'Curtains up...' + '\n' + 'Server started on: ' + port);
 
 
-// ROUTES ===========================================
-
+// SCRAPER ROUTES =======================================
+// >>>ESPN<<<
 app.get('/scrape', function(req, res){
 
   url = 'http://espn.go.com/nhl/statistics/player/_/stat/points/'
@@ -24,7 +24,7 @@ app.get('/scrape', function(req, res){
 
       var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
 
-      var json = {
+      var json = {[
         playerInfo : {
           playerName : "",
           // position : "",
@@ -35,12 +35,15 @@ app.get('/scrape', function(req, res){
           // plusMinus : "",
           // penMinutes : "",
         },
-      };
+      ]};
 
-      $('.oddrow' && '.evenrow').filter(function(){
+      $('tr.oddrow, tr.evenrow').filter(function(){
         var data = $(this);
+        // console.log(data);
 
-        playerName = data.children().eq(1).children().text();
+        playerName = data.children().children().text();
+        // playerName = data.find('td').find('a').text();
+
         // position = ;
         // team = ;
         // gamesPlayed = ;
@@ -62,12 +65,21 @@ app.get('/scrape', function(req, res){
 
     }; // end of if
 
-    fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
-      console.log('File created! JSON file located in project dir')
+    fs.writeFile('espnNHL.json', JSON.stringify(json, null, 4), function(err){
+      console.log('====================================' + '\n' + 'File created!' + '\n' + 'JSON file located in project Dir' + '\n' + '====================================' );
     });
 
     // res.send('Check console for status');
   }) // end of request
 });
 
+// >>>HOCKEY-REFERENCE<<<
+
 exports = module.exports = app;
+
+
+
+// NOTES ==========================================
+// - Can i find by table, pull table, then pull individually?
+// - Can i create a class or id, and pull based on that?
+//  - is there a completely different method to try?

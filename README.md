@@ -27,3 +27,14 @@ Deployment flow:
         - Pull request)
     - OR
     - (git push origin master)
+
+
+
+-- 
+REFERENCE:
+
+- jQuery Traversing:
+	- http://www.w3schools.com/jquery/jquery_ref_traversing.asp
+	- https://api.jquery.com/category/traversing/
+	- https://api.jquery.com/multiple-selector/
+
