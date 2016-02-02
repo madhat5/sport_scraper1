@@ -13,19 +13,19 @@ console.log('Silence please...' + '\n' + 'Curtains up...' + '\n' + 'Server start
 
 
 // SCRAPER ROUTES =======================================
-// >>>ESPN<<<
+// >>>HOCKEY-REFERENCE<<<
 app.get('/scrape', function(req, res){
 
-  url = 'http://espn.go.com/nhl/statistics/player/_/stat/points/'
+  url = 'http://www.hockey-reference.com/leagues/NHL_2016_skaters.html';
 
   request(url, function(err, resp, html){
     if (!err){
       var $ = cheerio.load(html);
 
-      var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
+      var skaters, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
 
-      var json = {[
-        playerInfo : {
+      var json = {
+        skaters : [{
           playerName : "",
           // position : "",
           // team : "",
@@ -34,14 +34,24 @@ app.get('/scrape', function(req, res){
           // assists : "",
           // plusMinus : "",
           // penMinutes : "",
-        },
-      ]};
+        }]
+      };
 
-      $('tr.oddrow, tr.evenrow').filter(function(){
-        var data = $(this);
+      for (var x = 0; x < 882; x++){
+        $('tr').data('row') === x.filter(function(){
+          var data = $(this);
+
+          playerName = data.find('td').find('a').text();
+
+          json.skaters[x].playerName = playerName;
+        };
+      )};
+
+      // $('tr').each().filter(function(){
+      //   var data = $(this);
         // console.log(data);
 
-        playerName = data.children().children().text();
+        // playerName = data.children().children().text();
         // playerName = data.find('td').find('a').text();
 
         // position = ;
@@ -52,7 +62,7 @@ app.get('/scrape', function(req, res){
         // plusMinus = ;
         // penMinutes = ;
 
-        json.playerInfo.playerName = playerName;
+        // json.playerInfo.playerName = playerName;
         // json.playerInfo.position = position;
         // json.playerInfo.team = team;
         // json.playerInfo.gamesPlayed = gamesPlayed;
@@ -65,7 +75,7 @@ app.get('/scrape', function(req, res){
 
     }; // end of if
 
-    fs.writeFile('espnNHL.json', JSON.stringify(json, null, 4), function(err){
+    fs.writeFile('hocrefNHL.json', JSON.stringify(json, null, 4), function(err){
       console.log('====================================' + '\n' + 'File created!' + '\n' + 'JSON file located in project Dir' + '\n' + '====================================' );
     });
 
@@ -73,13 +83,77 @@ app.get('/scrape', function(req, res){
   }) // end of request
 });
 
-// >>>HOCKEY-REFERENCE<<<
-
 exports = module.exports = app;
-
 
 
 // NOTES ==========================================
 // - Can i find by table, pull table, then pull individually?
-// - Can i create a class or id, and pull based on that?
+// - Can i create a class or id, and pull based on that? (.addClass)
 //  - is there a completely different method to try?
+
+// STORAGE ==========================================
+// >>>ESPN<<<
+// app.get('/scrape', function(req, res){
+
+//   url = 'http://espn.go.com/nhl/statistics/player/_/stat/points/'
+
+//   request(url, function(err, resp, html){
+//     if (!err){
+//       var $ = cheerio.load(html);
+
+//       var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
+
+//       var json = {
+//         playerInfo : {
+//           playerName : "",
+//           // position : "",
+//           // team : "",
+//           // gamesPlayed : "",
+//           // goals : "",
+//           // assists : "",
+//           // plusMinus : "",
+//           // penMinutes : "",
+//         },
+//       };
+
+//         // for (var x = 0; x < json.length; x++){
+//         //   playerName = data.children().children().text();
+
+//         //   json.skaters[x].playerName = playerName;
+//         // };
+
+//       $('tr.oddrow, tr.evenrow').filter(function(){
+//         var data = $(this);
+//         // console.log(data);
+
+//         playerName = data.children().children().text();
+//         // playerName = data.find('td').find('a').text();
+
+//         // position = ;
+//         // team = ;
+//         // gamesPlayed = ;
+//         // goals = ;
+//         // assists = ;
+//         // plusMinus = ;
+//         // penMinutes = ;
+
+//         json.playerInfo.playerName = playerName;
+//         // json.playerInfo.position = position;
+//         // json.playerInfo.team = team;
+//         // json.playerInfo.gamesPlayed = gamesPlayed;
+//         // json.playerInfo.goals = goals;
+//         // json.playerInfo.assists = assists;
+//         // json.playerInfo.plusMinus = plusMinus;
+//         // json.playerInfo.penMinutes = penMinutes;
+//       });
+
+
+//     }; // end of if
+
+//     fs.writeFile('espnNHL.json', JSON.stringify(json, null, 4), function(err){
+//       console.log('====================================' + '\n' + 'File created!' + '\n' + 'JSON file located in project Dir' + '\n' + '====================================' );
+//     });
+
+//     // res.send('Check console for status');
+//   }) // end of request
+// });

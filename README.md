@@ -38,3 +38,9 @@ REFERENCE:
 	- https://api.jquery.com/category/traversing/
 	- https://api.jquery.com/multiple-selector/
 
+- jSON:
+	- http://www.hunlock.com/blogs/Mastering_JSON_%28_JavaScript_Object_Notation_%29
+
+- scraping
+	- http://stackoverflow.com/questions/33815807/node-js-request-for-loop-runs-twice
+	- http://stackoverflow.com/questions/28243434/add-cheerio-based-search-loop-to-node-simplecrawler
