@@ -37,19 +37,24 @@ app.get('/scrape', function(req, res){
         }]
       };
 
-      for (var x = 0; x < 882; x++){
-        $('tr').data('row') === x.filter(function(){
-          var data = $(this);
+      $('tr').each().filter(function(){
+        var data = $(this);
 
-          playerName = data.find('td').find('a').text();
+        playerName = data.find('td').find('a').text();
 
-          json.skaters[x].playerName = playerName;
-        };
-      )};
+        json.skaters.playerName = playerName;
+      });
 
       // $('tr').each().filter(function(){
       //   var data = $(this);
         // console.log(data);
+
+        // for (var x = 0; x < 882; x++){
+        //   playerName = data.find('tr').eq(x).find('td').find('a').text();
+        //   console.log(playerName);
+
+        //   json.skaters[x].playerName = playerName;
+        // };
 
         // playerName = data.children().children().text();
         // playerName = data.find('td').find('a').text();
@@ -70,7 +75,7 @@ app.get('/scrape', function(req, res){
         // json.playerInfo.assists = assists;
         // json.playerInfo.plusMinus = plusMinus;
         // json.playerInfo.penMinutes = penMinutes;
-      });
+      // });
 
 
     }; // end of if
