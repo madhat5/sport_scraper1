@@ -1,5 +1,41 @@
 # sport_scraper1
 
+---
+---
+Timeline goals: (start by)
+
+- January --x--
+    - API build
+    	- scraper build
+
+- February --ox--
+	- API build
+    	- scraper build
+    - App build
+    	- wireframe/story
+    	- user auth (passport)
+    	- ideal team algorithm build
+    		- hockey and basketball
+	    - CRUD
+	        - user teams list/sport
+	        - user profile?
+    - user test?
+
+- March --o--
+    - MVP
+    - server launch
+        - heroku to start? or aws free?
+    - user test?
+
+- April --o--
+    - user test?
+    - design
+
+- May --o--
+	- setup dfs API for sale?
+
+
+---
 Deployment flow:
 
 - Create development branch
@@ -28,9 +64,14 @@ Deployment flow:
     - OR
     - (git push origin master)
 
+---
+---
+Bugs
 
+- store all data, not just last item found
 
--- 
+---
+---
 REFERENCE:
 
 - jQuery Traversing:
