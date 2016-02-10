@@ -68,7 +68,8 @@ Deployment flow:
 ---
 Bugs
 
-- store all data, not just last item found
+- scraper --ox--
+	- store all data, not just last item found
 
 ---
 ---
