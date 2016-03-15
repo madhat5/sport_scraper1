@@ -25,16 +25,14 @@ app.get('/scrape', function(req, res){
       var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
 
       var json = {
-        playerInfo : {
-          playerName : "",
-          // position : "",
-          // team : "",
-          // gamesPlayed : "",
-          // goals : "",
-          // assists : "",
-          // plusMinus : "",
-          // penMinutes : "",
-        },
+        playerName : "",
+        // position : "",
+        // team : "",
+        // gamesPlayed : "",
+        // goals : "",
+        // assists : "",
+        // plusMinus : "",
+        // penMinutes : "",
       };
 
         // for (var x = 0; x < json.length; x++){
@@ -43,45 +41,50 @@ app.get('/scrape', function(req, res){
         //   json.skaters[x].playerName = playerName;
         // };
 
-      var oddRow = $(".oddrow")
+      var oddRow = $(".oddrow").children().find("td").first().find("a");
 
-
-      $('tr.oddrow, tr.evenrow').filter(function(){
+      $(oddrow).each(function(i){
         var data = $(this);
-        // console.log(data);
 
-        playerName = data.children().children().text();
-        // playerName = data.find('td').find('a').text();
+        playerName = data.html();
 
-        // position = ;
-        // team = ;
-        // gamesPlayed = ;
-        // goals = ;
-        // assists = ;
-        // plusMinus = ;
-        // penMinutes = ;
-
-        json.playerInfo.playerName = playerName;
-        // json.playerInfo.position = position;
-        // json.playerInfo.team = team;
-        // json.playerInfo.gamesPlayed = gamesPlayed;
-        // json.playerInfo.goals = goals;
-        // json.playerInfo.assists = assists;
-        // json.playerInfo.plusMinus = plusMinus;
-        // json.playerInfo.penMinutes = penMinutes;
+        json.playerName = playerName;
       });
 
+      // WORKING ==========================================
+      // $('tr.oddrow, tr.evenrow').filter(function(){
+      //   var data = $(this);
+      //   // console.log(data);
 
+      //   playerName = data.children().children().text();
+      //   // playerName = data.find('td').find('a').text();
+
+      //   // position = ;
+      //   // team = ;
+      //   // gamesPlayed = ;
+      //   // goals = ;
+      //   // assists = ;
+      //   // plusMinus = ;
+      //   // penMinutes = ;
+
+      //   json.playerName = playerName;
+      //   // json.playerInfo.position = position;
+      //   // json.playerInfo.team = team;
+      //   // json.playerInfo.gamesPlayed = gamesPlayed;
+      //   // json.playerInfo.goals = goals;
+      //   // json.playerInfo.assists = assists;
+      //   // json.playerInfo.plusMinus = plusMinus;
+      //   // json.playerInfo.penMinutes = penMinutes;
+      // });
+      // ==================================================
     }; // end of if
 
     fs.writeFile('espnNHL.json', JSON.stringify(json, null, 4), function(err){
       console.log('====================================' + '\n' + 'File created!' + '\n' + 'JSON file located in project Dir' + '\n' + '====================================' );
     });
-
     // res.send('Check console for status');
   }) // end of request
 });
-
 exports = module.exports = app;
 
 
@@ -89,8 +92,6 @@ exports = module.exports = app;
 // - Can i find by table, pull table, then pull individually?
 // - Can i create a class or id, and pull based on that? (.addClass)
 //  - is there a completely different method to try?
-
-
 
 // STORAGE ==========================================
 // // >>>HOCKEY-REFERENCE<<<
