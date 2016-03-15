@@ -13,10 +13,9 @@ console.log('Silence please...' + '\n' + 'Curtains up...' + '\n' + 'Server start
 
 
 // SCRAPER ROUTES =======================================
-// >>>ESPN<<<
 app.get('/scrape', function(req, res){
 
-  url = 'http://espn.go.com/nhl/statistics/player/_/stat/points/'
+  url = 'http://www.hockey-reference.com/leagues/NHL_2016_skaters.html'
 
   request(url, function(err, resp, html){
     if (!err){
@@ -25,30 +24,25 @@ app.get('/scrape', function(req, res){
       var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
 
       var json = {
-        playerName : "",
-        // position : "",
-        // team : "",
-        // gamesPlayed : "",
-        // goals : "",
-        // assists : "",
-        // plusMinus : "",
-        // penMinutes : "",
-      };
+        players: [{
+          playerName : "",
+          // position : "",
+          // team : "",
+          // gamesPlayed : "",
+          // goals : "",
+          // assists : "",
+          // plusMinus : "",
+          // penMinutes : "",
+      }]};
 
-        // for (var x = 0; x < json.length; x++){
-        //   playerName = data.children().children().text();
+      var row = $("tr").find("td").find("a").first();
 
-        //   json.skaters[x].playerName = playerName;
-        // };
-
-      var oddRow = $(".oddrow").children().find("td").first().find("a");
-
-      $(oddrow).each(function(i){
+      $(row).each(function(i){
         var data = $(this);
 
         playerName = data.html();
 
-        json.playerName = playerName;
+        json.players.push(playerName);
       });
 
       // WORKING ==========================================
@@ -93,78 +87,4 @@ exports = module.exports = app;
 // - Can i create a class or id, and pull based on that? (.addClass)
 //  - is there a completely different method to try?
 
-// STORAGE ==========================================
-// // >>>HOCKEY-REFERENCE<<<
-// app.get('/scrape', function(req, res){
-
-//   url = 'http://www.hockey-reference.com/leagues/NHL_2016_skaters.html';
-
-//   request(url, function(err, resp, html){
-//     if (!err){
-//       var $ = cheerio.load(html);
-
-//       var skaters, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
-
-//       var json = {
-//         skaters : [{
-//           playerName : "",
-//           // position : "",
-//           // team : "",
-//           // gamesPlayed : "",
-//           // goals : "",
-//           // assists : "",
-//           // plusMinus : "",
-//           // penMinutes : "",
-//         }]
-//       };
-
-//       $('tr').each().filter(function(){
-//         var data = $(this);
-
-//         playerName = data.find('td').find('a').text();
-
-//         json.skaters.playerName = playerName;
-//       });
-
-//       // $('tr').each().filter(function(){
-//       //   var data = $(this);
-//         // console.log(data);
-
-//         // for (var x = 0; x < 882; x++){
-//         //   playerName = data.find('tr').eq(x).find('td').find('a').text();
-//         //   console.log(playerName);
-
-//         //   json.skaters[x].playerName = playerName;
-//         // };
-
-//         // playerName = data.children().children().text();
-//         // playerName = data.find('td').find('a').text();
-
-//         // position = ;
-//         // team = ;
-//         // gamesPlayed = ;
-//         // goals = ;
-//         // assists = ;
-//         // plusMinus = ;
-//         // penMinutes = ;
-
-//         // json.playerInfo.playerName = playerName;
-//         // json.playerInfo.position = position;
-//         // json.playerInfo.team = team;
-//         // json.playerInfo.gamesPlayed = gamesPlayed;
-//         // json.playerInfo.goals = goals;
-//         // json.playerInfo.assists = assists;
-//         // json.playerInfo.plusMinus = plusMinus;
-//         // json.playerInfo.penMinutes = penMinutes;
-//       // });
-
-
-//     }; // end of if
-
-//     fs.writeFile('hocrefNHL.json', JSON.stringify(json, null, 4), function(err){
-//       console.log('====================================' + '\n' + 'File created!' + '\n' + 'JSON file located in project Dir' + '\n' + '====================================' );
-//     });
-
-//     // res.send('Check console for status');
-//   }) // end of request
-// });
+// TEMP ==========================================
