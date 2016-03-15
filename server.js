@@ -12,47 +12,79 @@ app.listen(port);
 console.log('Silence please...' + '\n' + 'Curtains up...' + '\n' + 'Server started on: ' + port);
 
 
-// ROUTES ===========================================
-
+// SCRAPER ROUTES =======================================
 app.get('/scrape', function(req, res){
 
-  url = 'http://www.imdb.com/title/tt1229340/';
+  url = 'http://www.hockey-reference.com/leagues/NHL_2016_skaters.html'
 
   request(url, function(err, resp, html){
     if (!err){
       var $ = cheerio.load(html);
 
-      var title, release, rating;
-      var json = {
-        title : "",
-        release : "",
-        rating : ""
-      };
+      var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
 
-      $('.header').filter(function(){
+      var json = {
+        players: [{
+          playerName : "",
+          // position : "",
+          // team : "",
+          // gamesPlayed : "",
+          // goals : "",
+          // assists : "",
+          // plusMinus : "",
+          // penMinutes : "",
+      }]};
+
+      var row = $("tr").find("td").find("a").first();
+
+      $(row).each(function(i){
         var data = $(this);
 
-        title = data.children().first().text();
-        release = data.children().last().children().text();
+        playerName = data.html();
 
-        json.title = title;
-        json.release = release;
+        json.players.push(playerName);
       });
 
-      $('.star-box-giga-star').filter(function(){
-        var data = $(this);
+      // WORKING ==========================================
+      // $('tr.oddrow, tr.evenrow').filter(function(){
+      //   var data = $(this);
+      //   // console.log(data);
 
-        rating = data.text();
-        json.rating = rating;
-      })
+      //   playerName = data.children().children().text();
+      //   // playerName = data.find('td').find('a').text();
+
+      //   // position = ;
+      //   // team = ;
+      //   // gamesPlayed = ;
+      //   // goals = ;
+      //   // assists = ;
+      //   // plusMinus = ;
+      //   // penMinutes = ;
+
+      //   json.playerName = playerName;
+      //   // json.playerInfo.position = position;
+      //   // json.playerInfo.team = team;
+      //   // json.playerInfo.gamesPlayed = gamesPlayed;
+      //   // json.playerInfo.goals = goals;
+      //   // json.playerInfo.assists = assists;
+      //   // json.playerInfo.plusMinus = plusMinus;
+      //   // json.playerInfo.penMinutes = penMinutes;
+      // });
+      // ==================================================
     }; // end of if
 
-    fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
-      console.log('File created! JSON file located in project dir')
+    fs.writeFile('espnNHL.json', JSON.stringify(json, null, 4), function(err){
+      console.log('====================================' + '\n' + 'File created!' + '\n' + 'JSON file located in project Dir' + '\n' + '====================================' );
     });
-
     // res.send('Check console for status');
   }) // end of request
 });
-
 exports = module.exports = app;
+
+
+// NOTES ==========================================
+// - Can i find by table, pull table, then pull individually?
+// - Can i create a class or id, and pull based on that? (.addClass)
+//  - is there a completely different method to try?
+
+// TEMP ==========================================
