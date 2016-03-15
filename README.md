@@ -84,5 +84,6 @@ REFERENCE:
 	- http://www.hunlock.com/blogs/Mastering_JSON_%28_JavaScript_Object_Notation_%29
 
 - scraping
-	- http://stackoverflow.com/questions/33815807/node-js-request-for-loop-runs-twice
+	- https://github.com/madhat5/nhl-api/blob/master/lib/nhl.js
+    - http://stackoverflow.com/questions/33815807/node-js-request-for-loop-runs-twice
 	- http://stackoverflow.com/questions/28243434/add-cheerio-based-search-loop-to-node-simplecrawler
