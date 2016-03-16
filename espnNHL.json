@@ -1,3 +1,7 @@
 {
-    "playerName": "Justin Abdelkader"
+    "players": [
+        {
+            "name": "Justin Abdelkader"
+        }
+    ]
 }

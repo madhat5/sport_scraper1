@@ -23,24 +23,30 @@ app.get('/scrape', function(req, res){
 
       var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
 
+      // var json = {
+      //   players: [{
+      //     playerName : "",
+      //     // position : "",
+      //     // team : "",
+      //     // gamesPlayed : "",
+      //     // goals : "",
+      //     // assists : "",
+      //     // plusMinus : "",
+      //     // penMinutes : "",
+      // }]};
+
       var json = {
-        players: [{
-          playerName : "",
-          // position : "",
-          // team : "",
-          // gamesPlayed : "",
-          // goals : "",
-          // assists : "",
-          // plusMinus : "",
-          // penMinutes : "",
-      }]};
+        players: []
+      };
 
       var row = $("tr").find("td").find("a").first();
 
       $(row).each(function(i){
         var data = $(this);
 
-        playerName = data.html();
+        playerName = {
+          name: data.html()
+        }
 
         json.players.push(playerName);
       });
