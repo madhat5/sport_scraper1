@@ -8,7 +8,7 @@ Timeline goals: (start by)
     - API build
     	- scraper build
 
-- February --ox--
+- February/March --ox--
 	- API build
     	- scraper build
     - App build
@@ -21,17 +21,15 @@ Timeline goals: (start by)
 	        - user profile?
     - user test?
 
-- March --o--
+- April --o--
     - MVP
     - server launch
         - heroku to start? or aws free?
     - user test?
 
-- April --o--
+- May/June --o--
     - user test?
     - design
-
-- May --o--
 	- setup dfs API for sale?
 
 
@@ -85,5 +83,7 @@ REFERENCE:
 
 - scraping
 	- https://github.com/madhat5/nhl-api/blob/master/lib/nhl.js
+    - http://dillonbuchanan.com/programming/html-scraping-in-nodejs-with-cheerio/
+    - https://scotch.io/tutorials/scraping-the-web-with-node-js
     - http://stackoverflow.com/questions/33815807/node-js-request-for-loop-runs-twice
 	- http://stackoverflow.com/questions/28243434/add-cheerio-based-search-loop-to-node-simplecrawler
