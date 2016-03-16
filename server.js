@@ -24,53 +24,30 @@ app.get('/scrape', function(req, res){
       var playerInfo, playerName, position, team, gamesPlayed, goals, assists, plusMinus, penMinutes;
 
       var json = {
-        players: [{
-          playerName : "",
-          // position : "",
-          // team : "",
-          // gamesPlayed : "",
-          // goals : "",
-          // assists : "",
-          // plusMinus : "",
-          // penMinutes : "",
-      }]};
+        players: []
+      };
 
       var row = $("tr").find("td").find("a").first();
 
-      $(row).each(function(i){
+      $(row).each(function(){
         var data = $(this);
 
-        playerName = data.html();
+        playerName = {
+          name: data.html()
+        }
 
         json.players.push(playerName);
       });
 
-      // WORKING ==========================================
-      // $('tr.oddrow, tr.evenrow').filter(function(){
-      //   var data = $(this);
-      //   // console.log(data);
-
-      //   playerName = data.children().children().text();
-      //   // playerName = data.find('td').find('a').text();
-
-      //   // position = ;
-      //   // team = ;
-      //   // gamesPlayed = ;
-      //   // goals = ;
-      //   // assists = ;
-      //   // plusMinus = ;
-      //   // penMinutes = ;
-
-      //   json.playerName = playerName;
-      //   // json.playerInfo.position = position;
-      //   // json.playerInfo.team = team;
-      //   // json.playerInfo.gamesPlayed = gamesPlayed;
-      //   // json.playerInfo.goals = goals;
-      //   // json.playerInfo.assists = assists;
-      //   // json.playerInfo.plusMinus = plusMinus;
-      //   // json.playerInfo.penMinutes = penMinutes;
-      // });
-      // ==================================================
+      // ==========================================
+      // position = ;
+      // team = ;
+      // gamesPlayed = ;
+      // goals = ;
+      // assists = ;
+      // plusMinus = ;
+      // penMinutes = ;
+      // ==========================================
     }; // end of if
 
     fs.writeFile('espnNHL.json', JSON.stringify(json, null, 4), function(err){
@@ -85,6 +62,5 @@ exports = module.exports = app;
 // NOTES ==========================================
 // - Can i find by table, pull table, then pull individually?
 // - Can i create a class or id, and pull based on that? (.addClass)
-//  - is there a completely different method to try?
 
 // TEMP ==========================================
